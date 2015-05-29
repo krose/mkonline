@@ -1,0 +1,16 @@
+Package: mkonline
+Type: Package
+Title: R Wrapper for the MKonline API
+Version: 0.1
+Date: 2015-05-28
+Author: Kenneth Rose
+Maintainer: Kenneth Rose <kennethrose82@gmail.com>
+Description: This package is an R wrapper for the MKonline API.
+License: MIT
+Imports:
+    httr,
+    dplyr,
+    stringr,
+    readr,
+    magrittr,
+    lubridate
