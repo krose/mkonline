@@ -37,12 +37,12 @@ mk_list_files(mk_user = mk_user, mk_password = mk_password, only_accessible = FA
     ## 5 Amsterdam - Rotterdam - Antwerp      COA_INV_PERRET_W_S  ara
     ## 6 Amsterdam - Rotterdam - Antwerp COA_RPL_COST_PERRET_D_S  ara
     ##               updated
-    ## 1 2015-05-29 08:56:00
-    ## 2 2015-05-29 08:56:00
-    ## 3 2015-05-29 08:56:00
+    ## 1 2015-05-29 09:56:00
+    ## 2 2015-05-29 09:56:00
+    ## 3 2015-05-29 09:56:00
     ## 4 2015-05-29 09:00:00
     ## 5 2015-05-29 09:00:00
-    ## 6 2015-05-29 08:56:00
+    ## 6 2015-05-29 09:56:00
 
 ``` r
 mk_list_files(mk_user = mk_user, mk_password = mk_password, only_accessible = TRUE, time_zone = "GMT") %>% head()
@@ -62,124 +62,49 @@ mk_list_files(mk_user = mk_user, mk_password = mk_password, only_accessible = TR
 Download the files:
 
 ``` r
-mk_download_file(mk_user = mk_user, mk_password = mk_password, mk_file = "CON_POW_H_A", mk_area = "cee") %>% head()
+mk_download_file(mk_user = mk_user, mk_password = mk_password, mk_file = "PRO_WND_H_N", mk_area = "np") %>% str()
 ```
 
-    ## Data from MKonline.com Updated: ,2015-05-29 09:41, Descriptive name: ,Consumption Hourly Actual, Update frequency,Hourly, on arrival, Data Frequency,MWh Hourly,Timezone:,Europe/Oslo,
-
-    ## Source: local data frame [6 x 6]
-    ## 
-    ##               date con_cee_mk01_mwh_h_h_sa con_pl_mk01_mwh_h_h_sa
-    ## 1 2015-02-18 00:00                 32058.9                16712.5
-    ## 2 2015-02-18 01:00                 31298.0                16362.6
-    ## 3 2015-02-18 02:00                 30752.9                16200.1
-    ## 4 2015-02-18 03:00                 30542.8                16195.4
-    ## 5 2015-02-18 04:00                 30735.4                16309.0
-    ## 6 2015-02-18 05:00                 32228.7                17026.1
-    ## Variables not shown: con_cz_mk01_mwh_h_h_sa (dbl), con_sk_mk01_mwh_h_h_sa
-    ##   (dbl), con_hu_mk01_mwh_h_h_sa (dbl)
+    ## Data from MKonline.com Updated: ,2015-05-29 01:44, Descriptive name: ,Wind Power Production Hourly Normal, Update frequency,When required, Data Frequency,MWh Hourly,Timezone:,Europe/Oslo,Classes 'tbl_df' and 'data.frame':    43848 obs. of  17 variables:
+    ##  $ date                           : chr  "2014-01-01 00:00" "2014-01-01 01:00" "2014-01-01 02:00" "2014-01-01 03:00" ...
+    ##  $ pro_npa_wnd_normal_mk02_mwh_h_n: num  3643 3654 3640 3631 3626 ...
+    ##  $ pro_se_wnd_normal_mk02_mwh_h_n : num  1402 1401 1393 1394 1394 ...
+    ##  $ pro_no_wnd_normal_mk02_mwh_h_n : num  327 327 326 324 325 ...
+    ##  $ pro_dk_wnd_normal_mk02_mwh_h_n : num  1660 1671 1664 1658 1654 ...
+    ##  $ pro_dk1_wnd_normal_mk02_mwh_h_n: num  1297 1307 1300 1296 1294 ...
+    ##  $ pro_dk2_wnd_normal_mk02_mwh_h_n: num  362 365 363 361 360 ...
+    ##  $ pro_fi_wnd_normal_mk02_mwh_h_n : num  254 255 256 255 253 ...
+    ##  $ pro_se1_wnd_normal_mk02_mwh_h_n: num  106 106 107 108 109 ...
+    ##  $ pro_se2_wnd_normal_mk02_mwh_h_n: num  271 270 266 265 267 ...
+    ##  $ pro_se3_wnd_normal_mk02_mwh_h_n: num  586 586 584 585 584 ...
+    ##  $ pro_se4_wnd_normal_mk02_mwh_h_n: num  439 439 437 436 434 ...
+    ##  $ pro_no1_wnd_normal_mk02_mwh_h_n: logi  NA NA NA NA NA NA ...
+    ##  $ pro_no2_wnd_normal_mk02_mwh_h_n: num  51.7 52.1 51.2 50.1 50.3 50.8 50.3 49.2 48.8 48.7 ...
+    ##  $ pro_no3_wnd_normal_mk02_mwh_h_n: num  128 127 127 127 126 ...
+    ##  $ pro_no4_wnd_normal_mk02_mwh_h_n: num  68.6 68.1 67.5 67.6 68.1 67.9 66.9 66.8 67.2 67.3 ...
+    ##  $ pro_no5_wnd_normal_mk02_mwh_h_n: num  79.4 80 80.4 80 80.1 80.5 80.5 80.6 80.7 80.4 ...
 
 ``` r
-mk_download_file(mk_user = mk_user, mk_password = mk_password, mk_file = "CON_POW_MK02_H_A", mk_area = "cwe") %>% head()
+mk_download_file(mk_user = mk_user, mk_password = mk_password, mk_file = "WND_CAP_D_AF", mk_area = "np") %>% str()
 ```
 
-    ## Data from MKonline.com Updated: ,2015-02-26 13:32, Descriptive name: ,Consumption Hourly Actual Mk02, Update frequency,On demand, Data Frequency,MWh Hourly,Timezone:,Europe/Oslo,
+    ## Data from MKonline.com Updated: ,2015-05-29 01:44, Descriptive name: ,Wind Power Installed Capacity, Update frequency,When required, Data Frequency,MWh Hourly,Timezone:,Europe/Oslo,Classes 'tbl_df' and 'data.frame':  3289 obs. of  17 variables:
+    ##  $ date                         : chr  "2012-01-02" "2012-01-03" "2012-01-04" "2012-01-05" ...
+    ##  $ cap_npa_wnd_total_mk02_mw_d_a: num  7482 7484 7485 7487 7488 ...
+    ##  $ cap_se_wnd_total_mk02_mw_d_a : num  2784 2785 2786 2787 2788 ...
+    ##  $ cap_no_wnd_total_mk02_mw_d_a : num  547 547 547 548 548 ...
+    ##  $ cap_dk_wnd_total_mk02_mw_d_a : num  3952 3952 3952 3952 3952 ...
+    ##  $ cap_dk1_wnd_total_mk02_mw_d_a: num  2952 2952 2952 2952 2952 ...
+    ##  $ cap_dk2_wnd_total_mk02_mw_d_a: num  1000 1000 1000 1000 1000 ...
+    ##  $ cap_fi_wnd_total_mk02_mw_d_a : num  199 200 200 200 200 ...
+    ##  $ cap_se1_wnd_total_mk02_mw_d_a: num  151 151 151 151 151 151 151 151 151 151 ...
+    ##  $ cap_se2_wnd_total_mk02_mw_d_a: num  521 522 522 523 524 ...
+    ##  $ cap_se3_wnd_total_mk02_mw_d_a: num  1269 1269 1269 1270 1270 ...
+    ##  $ cap_se4_wnd_total_mk02_mw_d_a: num  843 843 844 844 844 ...
+    ##  $ cap_no1_wnd_total_mk02_mw_d_a: num  0 0 0 0 0 0 0 0 0 0 ...
+    ##  $ cap_no2_wnd_total_mk02_mw_d_a: num  77.7 77.9 78.1 78.3 78.5 78.7 78.9 79.1 79.3 79.5 ...
+    ##  $ cap_no3_wnd_total_mk02_mw_d_a: num  330 330 330 330 330 ...
+    ##  $ cap_no4_wnd_total_mk02_mw_d_a: num  114 114 114 114 114 ...
+    ##  $ cap_no5_wnd_total_mk02_mw_d_a: num  24.7 24.7 24.7 24.7 24.7 24.7 24.7 24.7 24.7 24.7 ...
 
-    ## Source: local data frame [6 x 8]
-    ## 
-    ##               date con_cwe_mk02_mwh_h_h_a con_de_mk02_mwh_h_h_a
-    ## 1 2013-01-01 00:00               142280.1               47296.5
-    ## 2 2013-01-01 01:00               138141.6               46198.5
-    ## 3 2013-01-01 02:00               133557.5               44466.0
-    ## 4 2013-01-01 03:00               126819.7               42850.7
-    ## 5 2013-01-01 04:00               122074.1               41775.8
-    ## 6 2013-01-01 05:00               120319.0               41025.4
-    ## Variables not shown: con_fr_mk02_mwh_h_h_a (dbl), con_at_mk02_mwh_h_h_a
-    ##   (dbl), con_ch_mk02_mwh_h_h_a (dbl), con_nl_mk02_mwh_h_h_a (dbl),
-    ##   con_be_mk02_mwh_h_h_a (dbl)
-
-``` r
-mk_download_file(mk_user = mk_user, mk_password = mk_password, mk_file = "PRO_WND_H_N", mk_area = "np") %>% head()
-```
-
-    ## Data from MKonline.com Updated: ,2015-05-29 01:44, Descriptive name: ,Wind Power Production Hourly Normal, Update frequency,When required, Data Frequency,MWh Hourly,Timezone:,Europe/Oslo,
-
-    ## Source: local data frame [6 x 17]
-    ## 
-    ##               date pro_npa_wnd_normal_mk02_mwh_h_n
-    ## 1 2014-01-01 00:00                          3642.8
-    ## 2 2014-01-01 01:00                          3654.0
-    ## 3 2014-01-01 02:00                          3639.5
-    ## 4 2014-01-01 03:00                          3630.8
-    ## 5 2014-01-01 04:00                          3625.6
-    ## 6 2014-01-01 05:00                          3617.4
-    ## Variables not shown: pro_se_wnd_normal_mk02_mwh_h_n (dbl),
-    ##   pro_no_wnd_normal_mk02_mwh_h_n (dbl), pro_dk_wnd_normal_mk02_mwh_h_n
-    ##   (dbl), pro_dk1_wnd_normal_mk02_mwh_h_n (dbl),
-    ##   pro_dk2_wnd_normal_mk02_mwh_h_n (dbl), pro_fi_wnd_normal_mk02_mwh_h_n
-    ##   (dbl), pro_se1_wnd_normal_mk02_mwh_h_n (dbl),
-    ##   pro_se2_wnd_normal_mk02_mwh_h_n (dbl), pro_se3_wnd_normal_mk02_mwh_h_n
-    ##   (dbl), pro_se4_wnd_normal_mk02_mwh_h_n (dbl),
-    ##   pro_no1_wnd_normal_mk02_mwh_h_n (lgl), pro_no2_wnd_normal_mk02_mwh_h_n
-    ##   (dbl), pro_no3_wnd_normal_mk02_mwh_h_n (dbl),
-    ##   pro_no4_wnd_normal_mk02_mwh_h_n (dbl), pro_no5_wnd_normal_mk02_mwh_h_n
-    ##   (dbl)
-
-``` r
-mk_download_file(mk_user = mk_user, mk_password = mk_password, mk_file = "WND_CAP_D_AF", mk_area = "np") %>% head()
-```
-
-    ## Data from MKonline.com Updated: ,2015-05-29 01:44, Descriptive name: ,Wind Power Installed Capacity, Update frequency,When required, Data Frequency,MWh Hourly,Timezone:,Europe/Oslo,
-
-    ## Source: local data frame [6 x 17]
-    ## 
-    ##         date cap_npa_wnd_total_mk02_mw_d_a cap_se_wnd_total_mk02_mw_d_a
-    ## 1 2012-01-02                        7482.0                       2784.1
-    ## 2 2012-01-03                        7483.7                       2785.1
-    ## 3 2012-01-04                        7485.3                       2786.2
-    ## 4 2012-01-05                        7486.9                       2787.3
-    ## 5 2012-01-06                        7488.5                       2788.3
-    ## 6 2012-01-07                        7490.1                       2789.4
-    ## Variables not shown: cap_no_wnd_total_mk02_mw_d_a (dbl),
-    ##   cap_dk_wnd_total_mk02_mw_d_a (dbl), cap_dk1_wnd_total_mk02_mw_d_a (dbl),
-    ##   cap_dk2_wnd_total_mk02_mw_d_a (dbl), cap_fi_wnd_total_mk02_mw_d_a (dbl),
-    ##   cap_se1_wnd_total_mk02_mw_d_a (dbl), cap_se2_wnd_total_mk02_mw_d_a
-    ##   (dbl), cap_se3_wnd_total_mk02_mw_d_a (dbl),
-    ##   cap_se4_wnd_total_mk02_mw_d_a (dbl), cap_no1_wnd_total_mk02_mw_d_a
-    ##   (dbl), cap_no2_wnd_total_mk02_mw_d_a (dbl),
-    ##   cap_no3_wnd_total_mk02_mw_d_a (dbl), cap_no4_wnd_total_mk02_mw_d_a
-    ##   (dbl), cap_no5_wnd_total_mk02_mw_d_a (dbl)
-
-See the info attributes:
-
-``` r
-mk_download_file(mk_user = mk_user, mk_password = mk_password, mk_file = "CON_POW_H_A", mk_area = "cee") %>% attr(x = ., which = "info")
-```
-
-    ## Data from MKonline.com Updated: ,2015-05-29 09:41, Descriptive name: ,Consumption Hourly Actual, Update frequency,Hourly, on arrival, Data Frequency,MWh Hourly,Timezone:,Europe/Oslo,
-
-    ## NULL
-
-``` r
-mk_download_file(mk_user = mk_user, mk_password = mk_password, mk_file = "CON_POW_MK02_H_A", mk_area = "cwe") %>% attr(x = ., which = "info")
-```
-
-    ## Data from MKonline.com Updated: ,2015-02-26 13:32, Descriptive name: ,Consumption Hourly Actual Mk02, Update frequency,On demand, Data Frequency,MWh Hourly,Timezone:,Europe/Oslo,
-
-    ## NULL
-
-``` r
-mk_download_file(mk_user = mk_user, mk_password = mk_password, mk_file = "PRO_WND_H_N", mk_area = "np") %>% attr(x = ., which = "info")
-```
-
-    ## Data from MKonline.com Updated: ,2015-05-29 01:44, Descriptive name: ,Wind Power Production Hourly Normal, Update frequency,When required, Data Frequency,MWh Hourly,Timezone:,Europe/Oslo,
-
-    ## NULL
-
-``` r
-mk_download_file(mk_user = mk_user, mk_password = mk_password, mk_file = "WND_CAP_D_AF", mk_area = "np") %>% attr(x = ., which = "info")
-```
-
-    ## Data from MKonline.com Updated: ,2015-05-29 01:44, Descriptive name: ,Wind Power Installed Capacity, Update frequency,When required, Data Frequency,MWh Hourly,Timezone:,Europe/Oslo,
-
-    ## NULL
+You can access the info attribute by using the attr function.
