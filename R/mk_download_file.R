@@ -64,7 +64,7 @@ mk_download_file <- function(mk_user, mk_password, key, area){
     mk_request <- mk_content[, stringr::str_length(names(mk_content)) != 0]
   }
 
-  return(mk_request)
+  return(mk_content)
 }
 
 
