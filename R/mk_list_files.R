@@ -42,7 +42,7 @@ mk_list_files <- function(mk_user, mk_password, only_accessible = FALSE, time_zo
   }
 
   # parse the date with the specified time_zone
-  mk_request$updated <- lubridate::ymd_hm(mk_request$updated)
+  mk_request$updated <- lubridate::ymd_hm(mk_request$updated, tz = time_zone)
   if(!stringr::str_detect(time_zone, "GMT")){
     mk_request$updated <- lubridate::force_tz(mk_request$updated, tzone = time_zone)
   }

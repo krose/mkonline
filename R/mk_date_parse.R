@@ -14,12 +14,12 @@ mk_date_parse <- function(date){
 
   if(all(stringr::str_detect(date, "[0-9]{4}+[:punct:]{1}+[0-9]{2}+[:punct:]{1}+[0-9]{2}+[:blank:]{1}+[0-9]{2}:[0-9]{2}"))){
     # Hourly
-    date <- lubridate::ymd_hm(date)
+    date <- lubridate::ymd_hm(date, tz = "GMT")
     return(date)
 
   } else if(all(stringr::str_detect(date, "[0-9]{4}+[:punct:]{1}+[0-9]{2}+[:punct:]{1}"))){
     # Daily
-    date <- lubridate::ymd(date)
+    date <- lubridate::ymd(date, tz = "GMT")
     return(date)
 
   } else {
