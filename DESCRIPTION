@@ -14,3 +14,4 @@ Imports:
     readr,
     magrittr,
     lubridate
+RoxygenNote: 5.0.1

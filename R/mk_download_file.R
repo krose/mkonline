@@ -1,8 +1,8 @@
 
 #' Function to download a file from MKonline
 #'
-#' @param mk_user
-#' @param mk_password
+#' @param mk_user Your MKOnline user name.
+#' @param mk_password Your MKOnline user password.
 #' @param key The key (as in file) to download (ex CON_POW_H_A)
 #' @param area The area (ex: cee, cwe, np, it etc.)
 #' @export
@@ -53,6 +53,10 @@ mk_download_file <- function(mk_user, mk_password, key, area){
   # Set attribtutes from the first five lines
   attr(x = mk_content, which = "info") <- first_8_lines[1:row_with_headers - 1]
 
+  # remove last column if all are NA and the column name is ""
+  if(names(mk_content)[length(names(mk_content))] == "" & all(is.na(mk_content[[length(names(mk_content))]]))){
+    mk_content[[length(names(mk_content))]] <- NULL
+  }
   # Clean names as they start with upper case and contain space
   # Remove headers named [empty]
   names(mk_content) <- stringr::str_trim(tolower(names(mk_content)), "both")

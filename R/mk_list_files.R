@@ -3,9 +3,9 @@
 #'
 #' The files list can be returned with either all the files or only the accessible files.
 #'
-#' @param mk_user
-#' @param mk_password
-#' @param only_accessible
+#' @param mk_user Your MKOnline user name.
+#' @param mk_password Your MKOnline user password.
+#' @param only_accessible TRUE if you only want to see your available data series.
 #' @param time_zone GMT (UTC) or another like CET. Used to parse the updated column
 #' @importFrom magrittr %>%
 #' @export
@@ -20,6 +20,7 @@ mk_list_files <- function(mk_user, mk_password, only_accessible = FALSE, time_zo
 
   # Get and parse content
   mk_request <- httr::content(x = mk_request, as = "text")
+  mk_request <- stringr::str_replace_all(string = mk_request, pattern = "\r\n\r\n", "\r\n") # remove the last empty line.
   mk_request <- readr::read_csv2(mk_request, skip = 2, col_names = TRUE, col_types = "ccccccc_")
 
   # Clean names as they start with upper case and contain space
