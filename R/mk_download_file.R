@@ -20,8 +20,8 @@ mk_download_file <- function(mk_user, mk_password, key, area){
   # find the starting line of the actual data by looking for "date" as
   # this is the headers before the content
   # Look for the value "date" in the headers and parse the date if it's there.
-  mk_request <- httr::content(x = mk_request, as = "text")
-  first_8_lines <- readr::read_lines(mk_request, n = 8)
+  mk_request <- httr::content(x = mk_request, as = "text", type = "text/csv", encoding = "UTF-8")
+  first_8_lines <- readr::read_lines(mk_request, n_max = 8)
   row_with_headers <- c(1:8)[stringr::str_detect(tolower(first_8_lines), "^date,")]
 
   look_for_date <- stringr::str_detect(tolower(first_8_lines[row_with_headers]), "^date")

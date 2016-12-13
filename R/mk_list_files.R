@@ -19,9 +19,9 @@ mk_list_files <- function(mk_user, mk_password, only_accessible = FALSE, time_zo
   httr::stop_for_status(mk_request)
 
   # Get and parse content
-  mk_request <- httr::content(x = mk_request, as = "text")
+  mk_request <- httr::content(x = mk_request, as = "text", type = "text/csv", encoding = "UTF-8")
   mk_request <- stringr::str_replace_all(string = mk_request, pattern = "\r\n\r\n", "\r\n") # remove the last empty line.
-  mk_request <- readr::read_csv2(mk_request, skip = 2, col_names = TRUE, col_types = "ccccccc_")
+  mk_request <- suppressWarnings(readr::read_csv2(mk_request, skip = 2, col_names = TRUE, col_types = "ccccccc_"))
 
   # Clean names as they start with upper case and contain space
   names(mk_request) <- stringr::str_replace_all(tolower(names(mk_request)), " ", "")
