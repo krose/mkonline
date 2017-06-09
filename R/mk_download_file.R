@@ -64,6 +64,7 @@ mk_download_file <- function(mk_user, mk_password, key, area){
   names(mk_content) <- stringr::str_replace_all(tolower(names(mk_content)), "/", "_")
   names(mk_content) <- stringr::str_replace_all(tolower(names(mk_content)), "[+]", "")
   names(mk_content) <- stringr::str_replace_all(tolower(names(mk_content)), "[%]", "")
+  names(mk_content) <- stringr::str_replace_all(tolower(names(mk_content)), "-", "_")
   if(names(mk_content)[length(names(mk_content))] == "" & all(is.na(mk_content[,length(names(mk_content))]))){
     mk_request <- mk_content[, stringr::str_length(names(mk_content)) != 0]
   }
