@@ -42,7 +42,7 @@ mk_download_file <- function(mk_user, mk_password, key, area){
                                   col_names = FALSE,
                                   col_types = paste(c("c", rep("d", times = length(mk_col_names) - 1)), collapse = ""),
                                   na = " ",
-                                  skip = row_with_headers + 1)
+                                  skip = row_with_headers)
     names(mk_content) <- mk_col_names
 
     mk_content$Date <- mk_date_parse(date = as.character(mk_content$Date))
