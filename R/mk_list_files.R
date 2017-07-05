@@ -1,5 +1,5 @@
 
-#' Function to return the file list
+#' Function to return the file list.
 #'
 #' The files list can be returned with either all the files or only the accessible files.
 #'
