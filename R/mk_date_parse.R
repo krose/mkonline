@@ -12,14 +12,20 @@ mk_date_parse <- function(date){
     stop("The date isn't a character vector.")
   }
 
-  if(all(stringr::str_detect(date, "[0-9]{4}+[:punct:]{1}+[0-9]{2}+[:punct:]{1}+[0-9]{2}+[:blank:]{1}+[0-9]{2}:[0-9]{2}"))){
+  if(all(stringr::str_detect(date, "[0-9]{4}+[:punct:]{1}+[0-9]{2}+[:punct:]{1}+[0-9]{2}+[:blank:]{1}+[0-9]{2}:[0-9]{2}:[0-9]{2}"))){
     # Hourly
-    date <- lubridate::ymd_hm(date, tz = "GMT")
+    date <- lubridate::ymd_hms(date, tz = "CET")
+    return(date)
+  }  
+  
+  else if(all(stringr::str_detect(date, "[0-9]{4}+[:punct:]{1}+[0-9]{2}+[:punct:]{1}+[0-9]{2}+[:blank:]{1}+[0-9]{2}:[0-9]{2}"))){
+    # Hourly
+    date <- lubridate::ymd_hm(date, tz = "CET")
     return(date)
 
   } else if(all(stringr::str_detect(date, "[0-9]{4}+[:punct:]{1}+[0-9]{2}+[:punct:]{1}"))){
     # Daily
-    date <- lubridate::ymd(date, tz = "GMT")
+    date <- lubridate::ymd(date, tz = "CET")
     return(date)
 
   } else {
