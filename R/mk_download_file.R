@@ -41,7 +41,7 @@ mk_download_file <- function(mk_user, mk_password, key, area){
     
     mk_content <- readr::read_csv(mk_request,
                                   col_names = FALSE,
-                                  na = " ",
+                                  na = "",
                                   skip = row_with_headers)
     names(mk_content) <- mk_col_names
 
