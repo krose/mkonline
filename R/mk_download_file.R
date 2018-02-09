@@ -21,7 +21,7 @@ mk_download_file <- function(mk_user, mk_password, key, area){
   # this is the headers before the content
   # Look for the value "date" in the headers and parse the date if it's there.
   mk_request <- httr::content(x = mk_request, as = "text", type = "text/csv", encoding = "UTF-8")
-  first_8_lines <- readr::read_lines(mk_request, n_max = 8)
+  first_8_lines <- suppressWarnings(readr::read_lines(mk_request, n_max = 8))
   row_with_headers <- c(1:8)[stringr::str_detect(tolower(first_8_lines), "^date,")]
 
   look_for_date <- stringr::str_detect(tolower(first_8_lines[row_with_headers]), "^date")
@@ -38,9 +38,9 @@ mk_download_file <- function(mk_user, mk_password, key, area){
 
   # parse if date is good
   if(look_for_date){
+    
     mk_content <- readr::read_csv(mk_request,
                                   col_names = FALSE,
-                                  col_types = paste(c("c", rep("d", times = length(mk_col_names) - 1)), collapse = ""),
                                   na = " ",
                                   skip = row_with_headers)
     names(mk_content) <- mk_col_names
@@ -65,8 +65,21 @@ mk_download_file <- function(mk_user, mk_password, key, area){
   names(mk_content) <- stringr::str_replace_all(tolower(names(mk_content)), "[+]", "")
   names(mk_content) <- stringr::str_replace_all(tolower(names(mk_content)), "[%]", "")
   names(mk_content) <- stringr::str_replace_all(tolower(names(mk_content)), "-", "_")
+  names(mk_content) <- stringr::str_replace_all(tolower(names(mk_content)), "\\[|\\]", "")
+  names(mk_content) <- stringr::str_replace_all(tolower(names(mk_content)), "\\(|\\)", "")
   if(names(mk_content)[length(names(mk_content))] == "" & all(is.na(mk_content[,length(names(mk_content))]))){
     mk_request <- mk_content[, stringr::str_length(names(mk_content)) != 0]
+  }
+  
+  # Are there empty column names ("")?
+  # - if they all are NA, then remove the column
+  # - if they not all are NA then give it the name 'empty'
+  if("" %in% names(mk_content)){
+    if(all(is.na(mk_content[, names(mk_content) == ""]))){
+      mk_content <- mk_content[, names(mk_content) != ""]
+    } else {
+      names(mk_content)[names(mk_content) == ""] <- "empty"
+    }
   }
 
   return(mk_content)
