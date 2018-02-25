@@ -21,7 +21,7 @@ ws_list_files <- function(only_accessible = FALSE, ws_user = Sys.getenv("WS_USER
   # Get and parse content
   ws_request <- httr::content(x = ws_request, as = "text", type = "text/csv", encoding = "UTF-8")
   ws_request <- stringr::str_replace_all(string = ws_request, pattern = "\r\n\r\n", "\r\n") # remove the last empty line.
-  ws_request <- suppressWarnings(readr::read_csv2(ws_request, skip = 2, col_names = TRUE, col_types = "ccccccc_"))
+  ws_request <- suppressWarnings(suppressMessages(readr::read_csv2(ws_request, skip = 2, col_names = TRUE, col_types = "ccccccc_")))
 
   # Clean names as they start with upper case and contain space
   names(ws_request) <- stringr::str_replace_all(tolower(names(ws_request)), " ", "")
@@ -36,10 +36,9 @@ ws_list_files <- function(only_accessible = FALSE, ws_user = Sys.getenv("WS_USER
 
   # some files are not accessible and the user might only be interested in
   # the accessible files
+  ws_request$access <- as.logical(toupper(ws_request$access))
   if(only_accessible){
-    ws_request <-
-      ws_request %>%
-      dplyr::filter(!stringr::str_detect(access, "false"))
+    ws_request <- ws_request[ws_request$access, ]
   }
 
   # parse the date with the specified time_zone
