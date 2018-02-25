@@ -2,7 +2,7 @@
 #' This is a helper function to detect the date format of a character vector with dates
 #'
 #' @param character vector of dates
-mk_date_parse <- function(date){
+ws_date_parse <- function(date){
   # First I check if the date is a character vector and then
   # I look for a date pattern that is either hourly or daily.
   # I look for the hourly first as the daily will turn up as true

@@ -3,52 +3,49 @@
 #'
 #' The files list can be returned with either all the files or only the accessible files.
 #'
-#' @param mk_user Your MKOnline user name.
-#' @param mk_password Your MKOnline user password.
 #' @param only_accessible TRUE if you only want to see your available data series.
-#' @param time_zone GMT (UTC) or another like CET. Used to parse the updated column
+#' @param ws_user Your Wattsight user name. Defaults to a environment variable called WS_USER.
+#' @param ws_password Your Wattsight user password. Defaults to a environment variable called WS_USER.
+#' 
 #' @importFrom magrittr %>%
 #' @export
-mk_list_files <- function(mk_user, mk_password, only_accessible = FALSE, time_zone = "GMT"){
+ws_list_files <- function(only_accessible = FALSE, ws_user = Sys.getenv("WS_USER"), ws_password = Sys.getenv("WS_PASSWORD")){
 
   # Make the request and use basic authentication to access the list files csv file
-  mk_request <- httr::GET(url = "http://download.mkonline.com/list-files?response-as=csv",
-                          httr::authenticate(user = mk_user, password = mk_password))
+  ws_request <- httr::GET(url = "http://download.mkonline.com/list-files?response-as=csv",
+                          httr::authenticate(user = ws_user, password = ws_password))
 
   # Make sure that the request is valid
-  httr::stop_for_status(mk_request)
+  httr::stop_for_status(ws_request)
 
   # Get and parse content
-  mk_request <- httr::content(x = mk_request, as = "text", type = "text/csv", encoding = "UTF-8")
-  mk_request <- stringr::str_replace_all(string = mk_request, pattern = "\r\n\r\n", "\r\n") # remove the last empty line.
-  mk_request <- suppressWarnings(readr::read_csv2(mk_request, skip = 2, col_names = TRUE, col_types = "ccccccc_"))
+  ws_request <- httr::content(x = ws_request, as = "text", type = "text/csv", encoding = "UTF-8")
+  ws_request <- stringr::str_replace_all(string = ws_request, pattern = "\r\n\r\n", "\r\n") # remove the last empty line.
+  ws_request <- suppressWarnings(readr::read_csv2(ws_request, skip = 2, col_names = TRUE, col_types = "ccccccc_"))
 
   # Clean names as they start with upper case and contain space
-  names(mk_request) <- stringr::str_replace_all(tolower(names(mk_request)), " ", "")
+  names(ws_request) <- stringr::str_replace_all(tolower(names(ws_request)), " ", "")
 
 
   # Sometimes the last row is NA, so remove it if it is.
-  na_test <- is.na(mk_request$updated)
+  na_test <- is.na(ws_request$updated)
   if(sum(na_test) > 1){
     warning("File contains more than 2 NAs. NAs have been removed")
   }
-  mk_request <- mk_request[!na_test,]
+  ws_request <- ws_request[!na_test,]
 
   # some files are not accessible and the user might only be interested in
   # the accessible files
   if(only_accessible){
-    mk_request <-
-      mk_request %>%
+    ws_request <-
+      ws_request %>%
       dplyr::filter(!stringr::str_detect(access, "false"))
   }
 
   # parse the date with the specified time_zone
-  mk_request$updated <- lubridate::ymd_hm(mk_request$updated, tz = time_zone)
-  if(!stringr::str_detect(time_zone, "GMT")){
-    mk_request$updated <- lubridate::force_tz(mk_request$updated, tzone = time_zone)
-  }
+  ws_request$updated <- lubridate::ymd_hm(ws_request$updated, tz = "CET")
 
-  return(mk_request)
+  return(ws_request)
 }
 
 
