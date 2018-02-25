@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-mkonline
-========
+wattsight
+=========
 
 This is an R wrapper for the Wattsight API.
 
