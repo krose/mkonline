@@ -62,14 +62,16 @@ ws_download_file <- function(key, area, ws_user = Sys.getenv("WS_USER"), ws_pass
   # Remove headers named [empty]
   names(ws_content) <- stringr::str_trim(tolower(names(ws_content)), "both")
   names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), " ", "_")
+  names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), "<", "_smaller_than_")
+  names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), ">", "_bigger_than_")
   names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), "/", "_")
-  names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), "[+]", "")
-  names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), "[%]", "")
+  names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), "[+]", "_plus_")
+  names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), "[%]", "_percentage_")
   names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), "-", "_")
   names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), "\\[|\\]", "")
   names(ws_content) <- stringr::str_replace_all(tolower(names(ws_content)), "\\(|\\)", "")
   if(names(ws_content)[length(names(ws_content))] == "" & all(is.na(ws_content[,length(names(ws_content))]))){
-    ws_request <- ws_content[, stringr::str_length(names(ws_content)) != 0]
+    ws_content <- ws_content[, stringr::str_length(names(ws_content)) != 0]
   }
   
   # Are there empty column names ("")?
