@@ -74,6 +74,13 @@ ws_download_file <- function(key, area, ws_user = Sys.getenv("WS_USER"), ws_pass
     ws_content <- ws_content[, stringr::str_length(names(ws_content)) != 0]
   }
   
+  is_character_na_test <- function(x){
+    
+    is.character(x) & all(is.na(x))
+  }
+  ws_content <- dplyr::mutate_if(ws_content, is_character_na_test, as.numeric)
+  
+  
   # Are there empty column names ("")?
   # - if they all are NA, then remove the column
   # - if they not all are NA then give it the name 'empty'
