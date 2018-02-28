@@ -12,7 +12,7 @@
 ws_list_files <- function(only_accessible = FALSE, ws_user = Sys.getenv("WS_USER"), ws_password = Sys.getenv("WS_PASSWORD")){
 
   # Make the request and use basic authentication to access the list files csv file
-  ws_request <- httr::GET(url = "http://download.mkonline.com/list-files?response-as=csv",
+  ws_request <- httr::GET(url = "http://download.wattsight.com/list-files?response-as=csv",
                           httr::authenticate(user = ws_user, password = ws_password))
 
   # Make sure that the request is valid
