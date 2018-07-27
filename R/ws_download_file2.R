@@ -28,7 +28,7 @@ ws_download_file2 <- function(key, area, ws_user = Sys.getenv("WS_USER"), ws_pas
   
   # If there are different lengths between the column names and the number of columns
   # in the data, then remove one column name.
-  ws_content <- readr::read_csv(ws_request, skip = 6)
+  ws_content <- suppressWarnings(readr::read_csv(ws_request, skip = 6))
   
   # Set attribtutes from the first five lines
   attr(x = ws_content, which = "info") <- first_6_lines
