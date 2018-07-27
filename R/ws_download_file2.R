@@ -42,12 +42,16 @@ ws_download_file2 <- function(key, area, ws_user = Sys.getenv("WS_USER"), ws_pas
   ws_names <- tolower(names(ws_content))
   names(ws_content) <- ws_names
   
+  if(all(stringr::str_detect(ws_names, "^x"))){
+    stop("All headers are replaced by default names. There might be a problem with the number of lines that are skipped in the call to readr::read_csv.")
+  }
+  
   if(ws_names[1] == "x1" & 
      stringr::str_detect(dplyr::summarise_all(ws_content, readr::guess_parser)[[1]][1], "date")){
     names(ws_content)[1] <- "date"
   }
   
-  if(stringr::str_detect(ws_names[length(ws_names)], "x")[1] & 
+  if(stringr::str_detect(ws_names[length(ws_names)], "^x")[1] & 
      all(is.na(ws_content[[length(ws_names)]]))){
     ws_content[[length(ws_names)]] <- NULL
   }
